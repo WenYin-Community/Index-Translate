@@ -49,7 +49,7 @@
 
 ---
 
-### 第二步：启动后端服务（二选一）
+### 第二步：启动后端服务（三选一）
 
 #### 选项 A：使用免费公网 35B API（推荐，无需本地显卡）
 
@@ -106,6 +106,12 @@ vllm serve IndexTeam/Index-Translate-9B \
     --max-model-len 4096
 ```
 
+#### 选项 C：Cloudflare Workers 公网代理（多设备共用）
+
+适合希望手机、平板、多台电脑共用一个固定地址的用户。部署步骤见 [Cloudflare Workers 部署文档](../deploy/cloudflare/README_zh.md)。
+
+部署完成后会得到一个 `https://<worker>.<subdomain>.workers.dev/v1` 地址；部署时设置的 `PROXY_TOKEN` 就是 API Key。
+
 ---
 
 ### 第三步：在沉浸式翻译中配置自定义服务
@@ -122,6 +128,8 @@ vllm serve IndexTeam/Index-Translate-9B \
 | **模型名称 (Model)** | `Index-Translate-35B-A3B` | `Index-Translate-9B` | 需与服务端声明的模型名称一致 |
 | **API Key (密钥)** | `index` | `none` | 本地服务无鉴权限制，可随意填写 |
 | **每秒最大请求数** | `3` ~ `5` | 根据显卡性能设置 (如 `5` ~ `10`) | 防止瞬时并发过高引起排队 |
+
+> 选项 C 的填写方式：翻译服务选 `OpenAI`，API URL 填 Worker 的 `/v1` 地址，模型填 `Index-Translate-35B-A3B`，API Key 填部署时设置的 `PROXY_TOKEN`。
 
 配置界面实操参考图：
 

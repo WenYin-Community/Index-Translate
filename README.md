@@ -254,6 +254,19 @@ See [captured cases](inference/llm/cases/translate_cases.jsonl), [text inference
 
 For audio, use the dedicated [S2TT subtitle guide](inference/echo-s2tt/README.md) or [S2ST dubbing guide](inference/echo-s2st/README.md).
 
+#### Option 3: Cloudflare Workers Public Proxy (Serverless, Optional)
+
+To expose the bridge proxy on the public internet for phones, tablets, and multiple computers, use the Cloudflare Worker in [`deploy/cloudflare/`](deploy/cloudflare/README.md). It keeps CORS, `enable_thinking=false`, and SSE pass-through, with a free-plan allowance of 100,000 requests/day:
+
+```bash
+cd deploy/cloudflare && npm install
+npx wrangler login
+npx wrangler secret put PROXY_TOKEN   # your API key; never commit it
+npm run deploy
+```
+
+Then set Immersive Translate's API URL to `https://<worker>.<subdomain>.workers.dev/v1` and its API Key to `PROXY_TOKEN`. See the [Cloudflare Workers deployment guide](deploy/cloudflare/README.md) for quotas and network caveats.
+
 ### Instruction Following & Constrained Translation
 
 Index-Translate deeply integrates instruction-following capabilities (instTrans). It supports both **hard constraints (format preservation, strict terminology glossary enforcement)** and **soft constraints (tone & style, domain disambiguation)** out of the box via `translate.py` and `syllable_translate.py`:
