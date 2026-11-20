@@ -106,12 +106,6 @@ vllm serve IndexTeam/Index-Translate-9B \
     --max-model-len 4096
 ```
 
-#### Option C: Cloudflare Workers Public Proxy (Multi-Device)
-
-Use this when phones, tablets, and multiple computers should share one fixed endpoint. See the [Cloudflare Workers deployment guide](../deploy/cloudflare/README.md) for setup.
-
-After deployment you get `https://<worker>.<subdomain>.workers.dev/v1`; the `PROXY_TOKEN` you configured is the API key.
-
 ---
 
 ### Step 3: Configure Immersive Translate
@@ -128,8 +122,6 @@ After deployment you get `https://<worker>.<subdomain>.workers.dev/v1`; the `PRO
 | **Model** | `Index-Translate-35B-A3B` | `Index-Translate-9B` | Must match the served model name |
 | **API Key** | `index` | `none` | Any placeholder string works |
 | **Rate Limit (Max Req/s)** | `3` ~ `5` | Based on GPU power (e.g. `5` ~ `10`) | Prevents concurrency queuing |
-
-> Option C: choose `OpenAI` as the service, enter the Worker's `/v1` URL as the API URL, use `Index-Translate-35B-A3B` as the model, and the configured `PROXY_TOKEN` as the API key.
 
 Settings reference:
 

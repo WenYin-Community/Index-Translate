@@ -255,19 +255,6 @@ python inference/llm/translate.py \
 
 语音任务请进入对应的 [S2TT 字幕教程](inference/echo-s2tt/README_zh.md)或 [S2ST 配音教程](inference/echo-s2st/README_zh.md)。
 
-#### 方式三：Cloudflare Workers 公网代理（零服务器，可选）
-
-需要把桥接代理放到公网、让手机 / 平板 / 多台电脑共用一个固定地址时，可使用 [`deploy/cloudflare/`](deploy/cloudflare/README_zh.md) 中的 Cloudflare Worker。它保留 CORS、`enable_thinking=false` 与 SSE 流式透传，免费计划为 10 万请求/天：
-
-```bash
-cd deploy/cloudflare && npm install
-npx wrangler login
-npx wrangler secret put PROXY_TOKEN   # 自定义 API Key，不要提交到仓库
-npm run deploy
-```
-
-部署后把沉浸式翻译的 API URL 填成 `https://<worker>.<subdomain>.workers.dev/v1`，API Key 填 `PROXY_TOKEN`。完整步骤、免费额度与网络限制见 [Cloudflare Workers 部署文档](deploy/cloudflare/README_zh.md)。
-
 ### 指令遵循与约束翻译（硬约束 / 软约束）
 
 Index-Translate 深度融合了指令遵循（instTrans）与结构化约束能力。模型不仅能高质量翻译，还支持**硬约束（格式保留、术语字典强干预）**与**软约束（文风语气、领域消歧）**，并通过 `translate.py` 和 `syllable_translate.py` 直接调用：
