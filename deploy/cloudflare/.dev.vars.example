@@ -1,0 +1,6 @@
+# Copy this file to .dev.vars for local `wrangler dev`.
+# Never commit the real token. For production use `wrangler secret put PROXY_TOKEN`.
+PROXY_TOKEN=replace-with-a-long-random-token
+
+# Optional: point at a self-hosted vLLM / SGLang server instead of the free API.
+# API_BASE=http://127.0.0.1:8000/v1

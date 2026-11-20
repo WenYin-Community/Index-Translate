@@ -1,0 +1,13 @@
+name = "index-translate-proxy"
+main = "src/index.ts"
+compatibility_date = "2026-11-20"
+workers_dev = true
+
+[vars]
+API_BASE = "https://index-translate.bilibili.com/v1"
+
+# PROXY_TOKEN must not live here. Set it once per environment:
+#   npx wrangler secret put PROXY_TOKEN
+#
+# Optional custom domain (the zone must already be on Cloudflare):
+# routes = [{ pattern = "translate.example.com", custom_domain = true }]
