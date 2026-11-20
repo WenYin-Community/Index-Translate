@@ -3,6 +3,9 @@ main = "src/index.ts"
 compatibility_date = "2026-11-20"
 workers_dev = true
 
+# Cloudflare creates the DNS record and certificate automatically.
+routes = [{ pattern = "trans.951959483.xyz", custom_domain = true }]
+
 [vars]
 API_BASE = "https://index-translate.bilibili.com/v1"
 
